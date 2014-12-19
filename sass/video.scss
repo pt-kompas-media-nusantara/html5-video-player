@@ -1,0 +1,493 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import 'compass/css3';
+
+$white: #fff;
+
+* {
+	margin: 0;
+	padding: 0;
+	@include box-sizing(border-box);
+}
+
+.wrapper {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.box-video {
+	position: relative;
+	overflow: hidden;
+
+	.bar-progress-range,
+	.bar-volume-range {
+		-webkit-appearance: none;
+		-webkit-tap-highlight-color: adjust_color($white, $alpha:-1);
+		margin: 0;
+		cursor: pointer;
+		outline: 0;
+		padding: 0;
+		width: 100%;
+
+		&:focus {
+			outline: none;
+		}
+
+		&::-webkit-slider-runnable-track {
+			border: inherit;
+			background-color: transparent;
+			height: 5px;
+		}
+
+		&::-moz-range-track {
+			border: inherit;
+			background-color: transparent;
+			height: 5px;
+		}
+
+		&::-ms-track {
+			border: inherit;
+			border-width: 3px 0;
+			border-color: transparent;
+			color: transparent;
+			background-color: transparent;
+			height: 5px;
+		}
+
+		&::-ms-fill-lower,
+		&::-ms-fill-upper {
+			background-color: transparent;
+		}
+
+		&::-ms-tooltip {
+			display: none;
+		}
+	}
+
+	.bar-progress-current {
+		height: 5px;
+		background-color: adjust_color($white, $alpha:-0.1);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 0;
+	}
+
+	.bar-progress-range {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		background-color: adjust_color($white, $alpha:-0.7);
+		height: 5px;
+
+		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 10px;
+			height: 5px;
+			border: 0;
+			background-color: $white;
+		}
+
+		&::-moz-range-thumb {
+			width: 10px;
+			height: 5px;
+			border: 0;
+			background-color: $white;
+		}
+
+		&::-ms-thumb {
+			width: 10px;
+			height: 5px;
+			border: 0;
+			background-color: $white;
+		}
+	}
+
+	.bar-progress-wrapper {
+		position: absolute;
+		height: 5px;
+		top: -5px;
+		left: 0;
+		width: 100%;
+	}
+
+	.bar-time {
+		color: #fff;
+		display: inline-block;
+		font-size: 16px;
+		position: absolute;
+		top: 50%;
+		right: 150px;
+		@include translateY(-50%);
+		text-align: center;
+	}
+
+	.bar-volume-current {
+		height: 5px;
+		background-color: adjust_color($white, $alpha:-0.1);
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 50%;
+		border-radius: 5px;
+	}
+
+	.bar-volume-range {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		background-color: adjust_color($white, $alpha:-0.7);
+		border-radius: 5px;
+		height: 5px;
+
+		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 11px;
+			height: 11px;
+			border: 0;
+			background-color: $white;
+			margin-top: -3px;
+			border-radius: 50%;
+		}
+
+		&::-moz-range-thumb {
+			width: 11px;
+			height: 11px;
+			border: 0;
+			background-color: $white;
+		}
+
+		&::-ms-thumb {
+			width: 11px;
+			height: 11px;
+			border: 0;
+			background-color: $white;
+		}
+	}
+
+	.btn-fullscreen {
+		background-image: url(../img/ico_fullscreen.svg);
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 30px 30px;
+		cursor: pointer;
+		height: 30px;
+		width: 30px;
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		@include translateY(-50%);
+	}
+
+	.btn-play {
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 30px 30px;
+		cursor: pointer;
+		height: 30px;
+		width: 30px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		@include translate(-50%, -50%);
+
+		&.pause {
+			background-image: url(../img/ico_pause.svg);
+		}
+
+		&.play {
+			background-image: url(../img/ico_play.svg);
+		}
+
+		&.replay {
+			background-image: url(../img/ico_replay.svg);
+		}
+
+		@media screen and (min-width: 320px) and (max-width: 767px) {
+			left: 50px;
+			@include translate(0, -50%);
+		}
+	}
+
+	.controls {
+		background-color: rgba(0,0,0,0.3);
+		height: 50px;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		@include single-transition(bottom, 400ms);
+
+		&.hidden {
+			bottom: -50px;
+		}
+	}
+
+	.ico-logo {
+		background-image: url(../img/logo_kompas.svg);
+		background-repeat: no-repeat;
+		background-size: 30px 30px;
+		background-position: center center;
+		height: 30px;
+		width: 30px;
+		position: absolute;
+		left: 10px;
+		top: 50%;
+		@include translateY(-50%);
+	}
+
+	.ico-volume {
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 100% 100%;
+		cursor: pointer;
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		left: -30px;
+		top: 50%;
+		@include translateY(-50%);
+
+		&.mute {
+			background-image: url(../img/ico_mute.svg);
+		}
+		
+		&.unmute {
+			background-image: url(../img/ico_unmute.svg);
+		}
+	}
+
+	.media-block {
+		display: block;
+	}
+
+	.volume-wrapper {
+		width: 60px;
+		position: absolute;
+		height: 5px;
+		right: 50px;
+		top: 50%;
+		@include translateY(-50%);
+	}
+}
+		
+	// .box-video a {
+	//     display: block;
+	//     text-decoration: none;
+		
+	// }
+
+	// .box-video input[type=range] {
+	//     -webkit-appearance: none;
+	//     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	//     background: rgba(255, 255, 255, 0.5);
+	//     margin: 0;
+	//     cursor: pointer;
+	//     outline: 0;
+	// }
+
+	// /*.box-video input[type=range]::-webkit-slider-runnable-track{
+	//     background: #f00;
+	// }*/
+
+	// .box-video input[type=range]::-moz-range-track {
+	//     border: inherit;
+	//     background: transparent;
+	// }
+
+	// .box-video input[type=range]::-ms-track {
+	//     border: inherit;
+	//     color: transparent;
+	//     background: transparent;
+	// }
+
+	// .box-video input[type=range]::-ms-fill-lower,
+	// .box-video input[type=range]::-ms-fill-upper {
+	//     background: transparent;
+	// }
+
+	// .box-video input[type=range]::-ms-tooltip {
+	//     display: none;
+	// }
+		
+	// .box-video video {
+	//     display: block;
+	//     width: 100%;
+	// }
+
+	// .box-video .bar-progress {
+	//     height: 5px;
+	//     width: 100%;
+	//     position: absolute;
+	//     left: 0;
+	//     top: -5px;
+	// }
+		
+	// .box-video .bar-progress::-webkit-slider-thumb {
+	//     -webkit-appearance: none;
+	//     width: 10px;
+	//     height: 5px;
+	//     border: 0;
+	//     background: #f00;
+	// }
+		
+	// .box-video .bar-progress::-moz-range-thumb {
+	//     width: 10px;
+	//     height: 5px;
+	//     border: 0;
+	//     background: #f00;
+	// }
+
+	// .box-video .bar-progress::-ms-thumb {
+	//     width: 10px;
+	//     height: 5px;
+	//     border: 0;
+	//     background: #f00;
+	// }
+
+	// .box-video .bar-progress-current {
+	//     /*-webkit-appearance: progress-bar;*/
+	//     background-color: rgba(255, 0, 0, 0.5);
+	//     height: 5px;
+	//     position: absolute;
+	//     top: -5px;
+	//     width: 100%;
+	// }
+		
+	// .box-video .bar-volume {
+	//     display: block;
+	//     width: 100%;
+	//     position: absolute;
+	//     top: 0;
+	//     left: 0;
+	//     height: 10px;
+	// }
+
+	// .box-video .bar-volume::-webkit-slider-thumb {
+	//     -webkit-appearance: none;
+	//     width: 5px;
+	//     height: 15px;
+	//     border: 0;
+	//     background: #f00;
+	// }
+
+	// .box-video .bar-volume::-moz-range-thumb {
+	//     width: 5px;
+	//     height: 15px;
+	//     border: 0;
+	//     background: #f00;
+	// }
+
+	// .box-video .bar-volume::-ms-thumb {
+	//     width: 10px;
+	//     height: 10px;
+	//     border: 0;
+	//     border-radius: 50%;
+	//     background: #f00;
+	// }
+	
+	// .box-video .btn-fullscreen {
+	//     display: block;
+	//     height: 30px;
+	//     width: 30px;
+	//     position: absolute;
+	//     right: 10px;
+	//     top: 50%;
+	//     -webkit-transform: translateY(-50%);
+	//     -moz-transform: translateY(-50%);
+	//     -ms-transform: translateY(-50%);
+	//     -o-transform: translateY(-50%);
+	//     transform: translateY(-50%);
+	//     cursor: pointer;
+	// }
+		
+	// .box-video .btn-play {
+	//     display: block;
+	//     color: #fff;
+	//     position: absolute;
+	//     top: 50%;
+	//     left: 50%;
+	//     -webkit-transform: translate(-50%, -50%);
+	//     -moz-transform: translate(-50%, -50%);
+	//     -ms-transform: translate(-50%, -50%);
+	//     -o-transform: translate(-50%, -50%);
+	//     transform: translate(-50%, -50%);
+	//     width: 30px;
+	//     height: 30px;
+	//     cursor: pointer;
+	// }
+		
+	// .box-video .controls {
+	//     background-color: rgba(0,0,0,0.3);
+	//     height: 50px;
+	//     width: 100%;
+	//     position: absolute;
+	//     left: 0;
+	//     bottom: 0;
+	//     -webkit-transition: bottom .4s;
+	//     transition: bottom .4s;
+	// }
+
+	// .box-video .controls.hidden {
+	//     bottom: -50px;
+	// }
+		
+	// .box-video .logo {
+	//     display: block;
+	//     height: 30px;
+	//     width: 30px;
+	//     position: absolute;
+	//     left: 10px;
+	//     top: 50%;
+	//     -webkit-transform: translateY(-50%);
+	//     -moz-transform: translateY(-50%);
+	//     -ms-transform: translateY(-50%);
+	//     -o-transform: translateY(-50%);
+	//     transform: translateY(-50%);
+	// }
+	
+	// .box-video .wrapper-volume {
+	//     width: 80px;
+	//     position: absolute;
+	//     height: 10px;
+	//     right: 50px;
+	//     top: 50%;
+	//     -webkit-transform: translateY(-50%);
+	//     -moz-transform: translateY(-50%);
+	//     -ms-transform: translateY(-50%);
+	//     -o-transform: translateY(-50%);
+	//     transform: translateY(-50%);
+	// }
+	
+	// .box-video .wrapper-volume img {
+	//     display: block;
+	//     width: 20px;
+	//     height: 20px;
+	//     position: absolute;
+	//     top: -5px;
+	//     left: -20px;
+	// }
+		
+	// .box-video .wrapper-volume img.muted {
+	//     opacity: 1;
+	// }
+		
+	// .box-video .wrapper-volume img.normal {
+	//     opacity: 0;
+	// }
+		
+	// .box-video .wrapper-volume .volume-current {
+	//     background: #f00;
+	//     height: 100%;
+	//     width: 50%;
+	//     /*max-width: 60px;*/
+	//     position: absolute;
+	//     top: 0;
+	//     left: 0;
+	// }
